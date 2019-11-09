@@ -146,9 +146,9 @@
 			hitCount++;
 
 			setTimeout(modoru, 500, mogura);
-			if (hitCount == 3) {
-				alert("目標達成");
-				finish();				
+			if (hitCount == 10) {
+				alert("目標達成!!!");
+				finish();
 			}
 		}
 
@@ -166,7 +166,7 @@
 			console.log(timer);
 			timer++;
 			if (timer == count) {
-				alert("終了！");
+				alert(`終了！ 叩いたモグラの数: ${hitCount}回`);
 				finish()
 			}
 		}, 1000)
