@@ -81,49 +81,109 @@
 		<div class="container">
 			<div class="relative">
 				<img class="ana" src="images/穴.png">
-				<img class="mogura uwagaki" src="images/モグ2.png">
+				<img class="mogura uwagaki" src="">
 			</div>
 			<div class="relative">
 				<img class="ana" src="images/穴.png">
-				<img class="mogura uwagaki" src="images/モグ2.png">
+				<img class="mogura uwagaki" src="">
 			</div>
 			<div class="relative">
 				<img class="ana" src="images/穴.png">
-				<img class="mogura uwagaki" src="images/モグ2.png">
-			</div>
-		</div>
-		<div class="container">
-			<div class="relative">
-				<img class="ana" src="images/穴.png">
-				<img class="mogura uwagaki" src="images/モグ2.png">
-			</div>
-			<div class="relative">
-				<img class="ana" src="images/穴.png">
-				<img class="mogura uwagaki" src="images/モグ2.png">
-			</div>
-			<div class="relative">
-				<img class="ana" src="images/穴.png">
-				<img class="mogura uwagaki" src="images/モグ2.png">
+				<img class="mogura uwagaki" src="">
 			</div>
 		</div>
 		<div class="container">
 			<div class="relative">
 				<img class="ana" src="images/穴.png">
-				<img class="mogura uwagaki" src="images/モグ2.png">
+				<img class="mogura uwagaki" src="">
 			</div>
 			<div class="relative">
 				<img class="ana" src="images/穴.png">
-				<img class="mogura uwagaki" src="images/モグ2.png">
+				<img class="mogura uwagaki" src="">
 			</div>
 			<div class="relative">
 				<img class="ana" src="images/穴.png">
-				<img class="mogura uwagaki" src="images/モグ2.png">
+				<img class="mogura uwagaki" src="">
+			</div>
+		</div>
+		<div class="container">
+			<div class="relative">
+				<img class="ana" src="images/穴.png">
+				<img class="mogura uwagaki" src="">
+			</div>
+			<div class="relative">
+				<img class="ana" src="images/穴.png">
+				<img class="mogura uwagaki" src="">
+			</div>
+			<div class="relative">
+				<img class="ana" src="images/穴.png">
+				<img class="mogura uwagaki" src="">
 			</div>
 		</div>
 	</div>
 
 	<script>
-		// ここにJavaScriptを書く
+
+		//最初は穴だけ
+		//1秒おきに一つの穴から一体ランダムで出る
+		//叩けたら、画像が変わって消える
+		//スコアが1増える
+		//30秒経ったら、ゲームオーバー
+		const count = 30;
+
+		const moguras = document.querySelectorAll(".mogura");
+		for (let i = 0; i < moguras.length; i++) {
+			const element = moguras[i];
+			element.onclick = hitMogura;
+		}
+
+		function hitMogura() {
+			const mogura = event.target;
+			// const mogura = this;
+			console.log(mogura);
+			console.log(mogura.src);
+			mogura.src = "images/mogu1.png";
+			hitCount++;
+
+			setTimeout(modoru, 500, mogura);
+			if (hitCount == 3) {
+				alert("目標達成");
+				finish();				
+			}
+		}
+
+		function deru() {
+			const random = Math.floor(Math.random() * moguras.length);
+			moguras[random].src = "images/mogu2.png";
+			setTimeout(kakureru, 800, moguras[random]);
+		}
+
+		const intervalId = setInterval(deru, 1000);
+		let hitCount = 0;
+		let timer = 0;
+
+		const timerId = setInterval(function () {
+			console.log(timer);
+			timer++;
+			if (timer == count) {
+				alert("終了！");
+				finish()
+			}
+		}, 1000)
+
+		function finish() {
+			clearInterval(timerId)
+			clearInterval(intervalId)
+		}
+
+		function modoru(mogura) {
+			console.log();
+			mogura.src = "images/mogu2.png";
+		}
+
+		function kakureru(mogura) {
+			mogura.src = "";
+		}
 	</script>
 </body>
 
